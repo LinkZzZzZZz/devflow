@@ -27,7 +27,7 @@ mkdir -p ~/.claude/devflow && cp "${CLAUDE_PLUGIN_ROOT}/.env.example" ~/.claude/
    - токен для вложений: `node "${CLAUDE_PLUGIN_ROOT}/skills/tracker/youtrack.mjs" check` — выводит логин; ошибка — назови её (нет ключей в `.env`, 401 — токен не тот);
    - MCP-сервер: `claude mcp list 2>/dev/null | grep -i youtrack`. Нет — дай пользователю команду для его терминала (токен подставит сам, в чат не присылает):
      ```
-     claude mcp add --scope user --transport http --header "Authorization: Bearer <постоянный токен>" youtrack https://<instance>.youtrack.cloud/mcp
+     claude mcp add --scope user --transport http youtrack https://<instance>.youtrack.cloud/mcp --header "Authorization: Bearer <постоянный токен>"
      ```
      Имя сервера — ровно `youtrack`: под него настроены скилл `tracker` и хук подтверждения записи `confirm-youtrack-write`. Сам команду не запускай.
 

@@ -38,7 +38,7 @@ claude plugin install devflow@devflow
 постоянным токеном (как выпустить — https://www.jetbrains.com/help/youtrack/cloud/manage-permanent-token.html):
 
 ```bash
-claude mcp add --scope user --transport http --header "Authorization: Bearer <постоянный токен>" youtrack https://<instance>.youtrack.cloud/mcp
+claude mcp add --scope user --transport http youtrack https://<instance>.youtrack.cloud/mcp --header "Authorization: Bearer <постоянный токен>"
 ```
 
 Имя сервера — ровно `youtrack`: скилл `tracker` зовёт `mcp__youtrack__*`, хук `confirm-youtrack-write` спрашивает
