@@ -1,0 +1,1 @@
+Шаблон конфига — `$DEVFLOW_ROOT/skills/task-workflow/references/workflow-template.md` (секции «Git», «Worktree», «Проверки», «Не коммитить»). Старый формат `.claude/branch-ops.md` читается как запасной вариант.

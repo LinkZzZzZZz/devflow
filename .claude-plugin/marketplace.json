@@ -1,0 +1,9 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "devflow",
+  "description": "Плагины Claude Code для процесса разработки",
+  "owner": { "name": "Egor Artamonov" },
+  "plugins": [
+    { "name": "devflow", "source": ".", "description": "Процесс ведения задач от постановки до PR" }
+  ]
+}
