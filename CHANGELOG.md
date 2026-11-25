@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.1 — 2026-11-25
+- заголовок авторизации после имени и адреса в команде claude mcp add (INSTALL, setup)
+
 ## 0.1.0 — 2026-11-25
 - первая версия: форк qtim-workflow 1.16.3 (коммит 4da8726) под YouTrack и GitHub (план — docs/plan.md)
 - трекер — YouTrack: скилл tracker читает тикет через MCP-сервер YouTrack, вложения скачивает клиент skills/tracker/youtrack.mjs (REST, постоянный токен); хук confirm-youtrack-write — подтверждение MCP-инструментов записи; поле стороны Бэк/Фронт/Оба в workflow.md
