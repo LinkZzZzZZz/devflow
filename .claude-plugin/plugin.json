@@ -1,6 +1,6 @@
 {
   "name": "devflow",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Процесс ведения задач: task-workflow, branch-ops, ревью PR на GitHub, трекер YouTrack, агенты implementer/quality-reviewer/security-reviewer/db-reviewer/black-box-tester/fact-checker/spec-critic/system-mapper/decision-critic, карты модулей и гейт базы знаний, циклы агентов по режимам, хуки-гейты и общие правила.",
   "author": {
     "name": "Egor Artamonov"

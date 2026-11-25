@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.0 — 2026-11-25
+- стороны back/front без «Оба»: общая задача фичи и подзадачи сторон, поле статуса status_field (skills/tracker, skills/task-workflow/references/new-ticket.md, skills/task-workflow/references/status.md, skills/task-workflow/references/workflow-template.md, INSTALL.md)
+
 ## 0.1.1 — 2026-11-25
 - заголовок авторизации после имени и адреса в команде claude mcp add (INSTALL, setup)
 

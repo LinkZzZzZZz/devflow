@@ -7,7 +7,8 @@
 - tracker: `youtrack`
 - project: `T`
 - side_field: `Сторона`
-- side: `<Бэк|Фронт — сторона этого репозитория; задачи «Оба» относятся к обеим>`
+- side: `<back|front — сторона этого репозитория>`
+- status_field: `<поле статуса проекта: State или Stage>`
 - url: `https://<instance>.youtrack.cloud/issue/{KEY}`
 
 ## Git

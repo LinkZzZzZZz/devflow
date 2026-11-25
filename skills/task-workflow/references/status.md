@@ -8,7 +8,7 @@
    - ветка: `git fetch origin && git log --oneline origin/<base>..origin/<KEY>` (или локальная);
    - влита ли: `git merge-base --is-ancestor origin/<KEY> origin/<base>`;
    - PR: `gh pr list --head <KEY> --state all --json number,state,url,mergeStateStatus`, проверки CI — `gh pr checks <KEY>`;
-   - статус в YouTrack: `mcp__youtrack__get_issue` (id = `<KEY>`) → поле State.
+   - статус в YouTrack: `mcp__youtrack__get_issue` (id = `<KEY>`) → поле `status_field` из `workflow.md` (по умолчанию `State`); у подзадачи стороны — ещё статус общей задачи и соседней подзадачи (`subtask of: <ключ общей>`).
 4. Краткая сводка: что сделано, что осталось, где лежит, PR и его состояние.
 
 Отвечать по фактам из файлов, git и трекера, а не по памяти о сессии.

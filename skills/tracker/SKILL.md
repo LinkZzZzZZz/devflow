@@ -1,6 +1,6 @@
 ---
 name: tracker
-description: Read-only работа с YouTrack из диалога — карточка тикета, комментарии, вложения, «что в работе», «что зависло» по стороне Бэк/Фронт/Оба. Триггеры — «/tracker», «что в работе», «что зависло», «покажи задачи бэка», «что по фронту», «скачай вложения T-12», «покажи тикет T-12». Не для записи в трекер (комментарии, статусы, новые задачи — только по прямой просьбе через MCP с подтверждением хука) и не для ведения тикета (task-workflow).
+description: Read-only работа с YouTrack из диалога — карточка тикета, комментарии, вложения, «что в работе», «что зависло» по стороне back/front; общая задача фичи — родитель подзадач сторон. Триггеры — «/tracker», «что в работе», «что зависло», «покажи задачи бэка», «что по фронту», «скачай вложения T-12», «покажи тикет T-12». Не для записи в трекер (комментарии, статусы, новые задачи — только по прямой просьбе через MCP с подтверждением хука) и не для ведения тикета (task-workflow).
 ---
 
 # /tracker — read-only YouTrack
@@ -15,7 +15,7 @@ description: Read-only работа с YouTrack из диалога — карт
 
 ## 0. Конфиг проекта
 
-`.claude/workflow.md` → «Тикет»: `key`, `project`, `side_field` (по умолчанию `Сторона`), `side` (сторона этого репозитория — «что в работе» без уточнения показывает её и «Оба»), `url`. Креды для вложений — `~/.claude/devflow/.env` (`YOUTRACK_URL`, `YOUTRACK_TOKEN`; `/devflow:setup`). Чтение — MCP-сервер YouTrack с именем `youtrack` (инструменты `mcp__youtrack__*`, схемы — `ToolSearch("select:mcp__youtrack__get_issue,…")`).
+`.claude/workflow.md` → «Тикет»: `key`, `project`, `side_field` (по умолчанию `Сторона`), `side` (сторона этого репозитория, `back` или `front` — «что в работе» без уточнения показывает её подзадачи), `status_field` (поле статуса, по умолчанию `State`), `url`. Модель задач — `references/commands.md` → «Модель задач». Креды для вложений — `~/.claude/devflow/.env` (`YOUTRACK_URL`, `YOUTRACK_TOKEN`; `/devflow:setup`). Чтение — MCP-сервер YouTrack с именем `youtrack` (инструменты `mcp__youtrack__*`, схемы — `ToolSearch("select:mcp__youtrack__get_issue,…")`).
 
 ## 1. Протокол
 
@@ -31,11 +31,12 @@ description: Read-only работа с YouTrack из диалога — карт
 |---|---|---|
 | карточка тикета (зовёт `task-workflow`) | `get_issue` + `get_issue_comments` (все страницы) | поля, описание, комментарии как есть |
 | вложения | `node "${CLAUDE_PLUGIN_ROOT}/skills/tracker/youtrack.mjs" attachments --key <KEY> --out <каталог>` | JSON `{count, saved}` |
-| «что в работе», «задачи бэка/фронта» | `search_issues`: `project: <project> #Unresolved` + сторона | форма A |
+| «что в работе», «задачи бэка/фронта» | `search_issues`: `project: <project> #Unresolved <side_field>: <сторона>`, общая задача — из связи «subtask of» | форма A |
+| «что по фиче T-10» | `get_issue T-10` + `search_issues`: `subtask of: T-10` | форма C |
 | «что зависло» | та же выборка, отбор по дате обновления | форма B |
 | проверка доступа | `node …/youtrack.mjs check`; MCP — `get_current_user` | логин |
 
-Запросы, сторона, «зависло» — `references/commands.md`. Формы A/B — `references/forms.md`.
+Модель задач, запросы, сторона, «зависло» — `references/commands.md`. Формы A/B/C — `references/forms.md`.
 
 ## 3. Цикл
 
@@ -44,9 +45,9 @@ description: Read-only работа с YouTrack из диалога — карт
 ## 4. Отчёт
 
 ```
-📋 T · в работе 5 (бэк 3 · фронт 1 · оба 1) · зависло 1
-| Задача | Про что | Сторона | Статус | Исполнитель | Обновлена |
-| T-12 | Расписание занятий: перенос урока | Бэк | In Progress | Егор | 2 дня назад |
+📋 T · в работе 4 (back 3 · front 1) · зависло 1
+| Задача | Про что | Сторона | Общая | Статус | Исполнитель | Обновлена |
+| T-12 | Перенос урока: API | back | T-10 | В работе | Егор | 2 дня назад |
 ```
 
 ## Остановка
